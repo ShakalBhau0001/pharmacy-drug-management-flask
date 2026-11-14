@@ -1,1 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}Drug Store Management{% endblock %}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body class="{% block body_class %}{% endblock %}">
+    {% if session.user %}
+    <div class="topbar">
+      <div class="wrap">
+        <span class="brand">Drug Store Management</span>
+        <a href="{{ url_for('logout') }}">Logout</a>
+      </div>
+    </div>
+    <div class="navbar">
+      <div class="wrap">
+        <a href="{{ url_for('home') }}">HOME</a>
+        {% if session.role == 'customer' %}
+        <a href="{{ url_for('buy') }}">BUY</a>
+        <a href="{{ url_for('my_orders') }}">ORDERS</a>
+        {% else %}
+        <a href="{{ url_for('add_product') }}">ADD</a>
+        <a href="{{ url_for('restock') }}">RESTOCK</a>
+        <a href="{{ url_for('my_orders') }}">ORDERS</a>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
 
+    <div class="page">
+      {% with messages = get_flashed_messages(with_categories=true) %} {% for
+      category, message in messages %}
+      <div class="flash {{ category }}">{{ message }}</div>
+      {% endfor %} {% endwith %} {% block content %}{% endblock %}
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>
