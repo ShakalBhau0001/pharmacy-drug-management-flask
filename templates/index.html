@@ -1,1 +1,11 @@
-
+{% extends "base.html" %} {% block body_class %}centered{% endblock %} {% block
+content %}
+<div class="box">
+  <h2>Drug Store Management</h2>
+  <a class="btn" href="{{ url_for('login') }}">Login</a>
+  <a class="btn" href="{{ url_for('register_customer') }}"
+    >Register As Customer</a
+  >
+  <a class="btn" href="{{ url_for('register_seller') }}">Register As Vendor</a>
+</div>
+{% endblock %}
