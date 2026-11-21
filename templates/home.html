@@ -1,1 +1,33 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+<h2>Welcome {{ session.user }}</h2>
 
+<div class="profile-card">
+  {% if session.role == 'customer' %}
+  <img
+    src="{{ url_for('static', filename='images/User.png') }}"
+    alt="Customer"
+    width="200"
+  />
+  <div class="profile-info">
+    <h3>{{ profile.fname }} {{ profile.lname }}</h3>
+    <p><b>ID:</b> {{ profile.uid }}</p>
+    <p><b>Address:</b> {{ profile.address }}</p>
+    <p><b>Phone:</b> {{ profile.phno }}</p>
+    <p><b>Email:</b> {{ profile.email }}</p>
+  </div>
+  {% else %}
+  <img
+    src="{{ url_for('static', filename='images/vendor.png') }}"
+    alt="Vendor"
+    width="220"
+  />
+  <div class="profile-info">
+    <h3>{{ profile.sname }}</h3>
+    <p><b>ID:</b> {{ profile.sid }}</p>
+    <p><b>Address:</b> {{ profile.address }}</p>
+    <p><b>Phone:</b> {{ profile.phno }}</p>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
