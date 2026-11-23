@@ -1,1 +1,39 @@
-
+{% extends "base.html" %} {% block title %}Register{% endblock %} {% block
+body_class %}centered{% endblock %} {% block content %}
+<form class="box" method="post" action="{{ url_for('register_seller') }}">
+  <h2>Register New Vendor</h2>
+  <input
+    type="text"
+    name="name"
+    placeholder="Enter Name"
+    value="{{ form.name or '' }}"
+    required
+  />
+  <input
+    type="text"
+    name="phno"
+    placeholder="Enter Phone Number"
+    data-numeric
+    value="{{ form.phno or '' }}"
+    required
+  />
+  <input
+    type="text"
+    name="address"
+    placeholder="Enter Address"
+    value="{{ form.address or '' }}"
+    required
+  />
+  <input
+    type="text"
+    name="uid"
+    placeholder="Enter Vendor ID"
+    value="{{ form.uid or '' }}"
+    required
+  />
+  <input type="password" name="pass1" placeholder="Enter Password" required />
+  <input type="password" name="pass2" placeholder="Retype Password" required />
+  <input type="submit" value="Submit" />
+  <p class="small"><a href="{{ url_for('index') }}">Back</a></p>
+</form>
+{% endblock %}
