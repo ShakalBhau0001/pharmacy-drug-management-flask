@@ -1,40 +1,18 @@
-{% extends "base.html" %} {% block title %}Login{% endblock %} {% block
-body_class %}centered{% endblock %} {% block content %}
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% set body_class = "centered" %}
+{% block content %}
 <form class="box" method="post" action="{{ url_for('login') }}">
-  <h2>Login</h2>
-  <select name="utype" required>
-    <option value="" disabled {% if not form.utype %}selected{% endif %}>
-      Select Account Type
-    </option>
-    {% for value, label in types.items() %}
-    <option
-      value="{{ value }}"
-      {%
-      if
-      form.utype=""
-      ="value"
-      %}selected{%
-      endif
-      %}
-    >
-      {{ label }}
-    </option>
-    {% endfor %}
-  </select>
-  <input
-    type="text"
-    name="userid"
-    placeholder="Enter User ID"
-    value="{{ form.userid or '' }}"
-    required
-  />
-  <input
-    type="password"
-    name="password"
-    placeholder="Enter Password"
-    required
-  />
-  <input type="submit" value="Login" />
-  <p class="small"><a href="{{ url_for('index') }}">Back</a></p>
+    <h2>Login</h2>
+    <select name="utype" data-selected="{{ form.utype or '' }}" required>
+        <option value="" disabled selected>Select Account Type</option>
+        {% for value, label in types.items() %}
+            <option value="{{ value }}">{{ label }}</option>
+        {% endfor %}
+    </select>
+    <input type="text" name="userid" placeholder="Enter User ID" value="{{ form.userid or '' }}" required>
+    <input type="password" name="password" placeholder="Enter Password" required>
+    <input type="submit" value="Login">
+    <p class="small"><a href="{{ url_for('index') }}">Back</a></p>
 </form>
 {% endblock %}
