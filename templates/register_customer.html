@@ -1,53 +1,18 @@
-{% extends "base.html" %} {% block title %}Register{% endblock %} {% block
-body_class %}centered{% endblock %} {% block content %}
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% set body_class = "centered" %}
+{% block content %}
 <form class="box" method="post" action="{{ url_for('register_customer') }}">
-  <h2>Register New Customer</h2>
-  <input
-    type="text"
-    name="fname"
-    placeholder="Enter First Name"
-    value="{{ form.fname or '' }}"
-    required
-  />
-  <input
-    type="text"
-    name="lname"
-    placeholder="Enter Last Name"
-    value="{{ form.lname or '' }}"
-    required
-  />
-  <input
-    type="email"
-    name="email"
-    placeholder="Enter Email ID"
-    value="{{ form.email or '' }}"
-    required
-  />
-  <input
-    type="text"
-    name="phno"
-    placeholder="Enter Phone Number"
-    data-numeric
-    value="{{ form.phno or '' }}"
-    required
-  />
-  <input
-    type="text"
-    name="address"
-    placeholder="Enter Address"
-    value="{{ form.address or '' }}"
-    required
-  />
-  <input
-    type="text"
-    name="uid"
-    placeholder="Enter Customer ID"
-    value="{{ form.uid or '' }}"
-    required
-  />
-  <input type="password" name="pass1" placeholder="Enter Password" required />
-  <input type="password" name="pass2" placeholder="Retype Password" required />
-  <input type="submit" value="Submit" />
-  <p class="small"><a href="{{ url_for('index') }}">Back</a></p>
+    <h2>Register New Customer</h2>
+    <input type="text" name="fname" placeholder="Enter First Name" value="{{ form.fname or '' }}" required>
+    <input type="text" name="lname" placeholder="Enter Last Name" value="{{ form.lname or '' }}" required>
+    <input type="email" name="email" placeholder="Enter Email ID" value="{{ form.email or '' }}" required>
+    <input type="text" name="phno" placeholder="Enter Phone Number" data-numeric value="{{ form.phno or '' }}" required>
+    <input type="text" name="address" placeholder="Enter Address" value="{{ form.address or '' }}" required>
+    <input type="text" name="uid" placeholder="Enter Customer ID" value="{{ form.uid or '' }}" required>
+    <input type="password" name="pass1" placeholder="Enter Password" required>
+    <input type="password" name="pass2" placeholder="Retype Password" required>
+    <input type="submit" value="Submit">
+    <p class="small"><a href="{{ url_for('index') }}">Back</a></p>
 </form>
 {% endblock %}
