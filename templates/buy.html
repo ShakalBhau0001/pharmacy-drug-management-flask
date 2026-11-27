@@ -1,52 +1,39 @@
-{% extends "base.html" %} {% block title %}Buy{% endblock %} {% block content %}
+{% extends "base.html" %}
+{% block title %}Buy{% endblock %}
+{% block content %}
 <div class="toolbar">
-  <h2>Buy Medicines</h2>
-  <input
-    type="text"
-    id="product-search"
-    placeholder="Search by name or manufacturer"
-  />
+    <h2>Buy Medicines</h2>
+    <input type="text" id="product-search" placeholder="Search by name or manufacturer">
 </div>
 
 {% if items %}
 <div class="grid">
-  {% for item in items %}
-  <div
-    class="card product-card"
-    data-search="{{ item.pname|lower }} {{ item.manufacturer|lower }}"
-  >
-    <img
-      src="{{ url_for('static', filename='images/pills.png') }}"
-      alt=""
-      width="140"
-    />
-    <h3>{{ item.pname }}</h3>
-    <p><b>ID:</b> {{ item.pid }}</p>
-    <p><b>Manufacturer:</b> {{ item.manufacturer }}</p>
-    <p><b>Mfg Date:</b> {{ item.mfg }}</p>
-    <p><b>Exp Date:</b> {{ item.exp }}</p>
-    <p><b>Stock:</b> {{ item.quantity }}</p>
-    <p><b>Price:</b> {{ item.price }}</p>
-    {% if item.quantity > 0 %}
-    <form method="post" action="{{ url_for('order') }}">
-      <input
-        type="number"
-        name="orderquantity"
-        min="1"
-        max="{{ item.quantity }}"
-        placeholder="Enter quantity"
-        required
-      />
-      <input type="hidden" name="pid" value="{{ item.pid }}" />
-      <button>Buy</button>
-    </form>
-    {% else %}
-    <button disabled>Out Of Stock</button>
-    {% endif %}
-  </div>
-  {% endfor %}
+    {% for item in items %}
+    <div class="card product-card" data-search="{{ item.pname|lower }} {{ item.manufacturer|lower }}">
+        <img src="{{ url_for('static', filename='images/pills.png') }}" alt="" width="140">
+        <h3>{{ item.pname }}</h3>
+        <p><b>ID:</b> {{ item.pid }}</p>
+        <p><b>Manufacturer:</b> {{ item.manufacturer }}</p>
+        <p><b>Mfg Date:</b> {{ item.mfg }}</p>
+        <p><b>Exp Date:</b> {{ item.exp }}</p>
+        <p><b>Stock:</b> {{ item.quantity }}</p>
+        <p><b>Price:</b> {{ item.price }}</p>
+        {% if item.exp < today %}
+        <button disabled>Expired</button>
+        {% elif item.quantity > 0 %}
+        <form method="post" action="{{ url_for('order') }}">
+            <input type="number" name="orderquantity" min="1" max="{{ item.quantity }}" placeholder="Enter quantity" required>
+            <input type="hidden" name="pid" value="{{ item.pid }}">
+            <button>Buy</button>
+        </form>
+        {% else %}
+        <button disabled>Out Of Stock</button>
+        {% endif %}
+    </div>
+    {% endfor %}
 </div>
 <p id="no-match" class="small" hidden>No products match your search.</p>
 {% else %}
 <p>No products available yet.</p>
-{% endif %} {% endblock %}
+{% endif %}
+{% endblock %}
