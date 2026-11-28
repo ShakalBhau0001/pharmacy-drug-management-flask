@@ -1,3 +1,5 @@
+-- SQLite schema created automatically by core/database.py
+
 CREATE TABLE customer (
             uid TEXT PRIMARY KEY,
             pass_hash TEXT NOT NULL,
