@@ -1,34 +1,30 @@
-{% extends "base.html" %} {% block title %}Orders{% endblock %} {% block content
-%}
+{% extends "base.html" %}
+{% block title %}Orders{% endblock %}
+{% block content %}
 <h2>Orders</h2>
 
 {% if rows %}
 <table>
-  <tr>
-    <th>Order ID</th>
-    <th>Product ID</th>
-    <th>Total Price</th>
-    <th>Quantity</th>
-    <th>
-      {% if session.role == 'customer' %}Seller ID{% else %}Customer ID{% endif
-      %}
-    </th>
-    <th>Order Date and Time</th>
-  </tr>
-  {% for row in rows %}
-  <tr>
-    <td>{{ row.oid }}</td>
-    <td>{{ row.pid }}</td>
-    <td>{{ row.price }}</td>
-    <td>{{ row.quantity }}</td>
-    <td>
-      {% if session.role == 'customer' %}{{ row.sid }}{% else %}{{ row.uid }}{%
-      endif %}
-    </td>
-    <td>{{ row.orderdatetime }}</td>
-  </tr>
-  {% endfor %}
+    <tr>
+        <th>Order ID</th>
+        <th>Product ID</th>
+        <th>Total Price</th>
+        <th>Quantity</th>
+        <th>{% if session.role == 'customer' %}Seller ID{% else %}Customer ID{% endif %}</th>
+        <th>Order Date and Time</th>
+    </tr>
+    {% for row in rows %}
+    <tr>
+        <td>{{ row.oid }}</td>
+        <td>{{ row.pid }}</td>
+        <td>{{ row.price }}</td>
+        <td>{{ row.quantity }}</td>
+        <td>{% if session.role == 'customer' %}{{ row.sid }}{% else %}{{ row.uid }}{% endif %}</td>
+        <td>{{ row.orderdatetime }}</td>
+    </tr>
+    {% endfor %}
 </table>
 {% else %}
 <p>No orders yet.</p>
-{% endif %} {% endblock %}
+{% endif %}
+{% endblock %}
